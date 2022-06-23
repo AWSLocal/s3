@@ -1,7 +1,12 @@
 import { Request, Response } from 'express';
 import { pick } from 'lodash';
+import { getRawBuffer } from './helpers/request.helper';
 
-function handle(req: Request, res: Response) {
+async function handle(req: Request, res: Response) {
+
+  const buffer = await getRawBuffer(req);
+  console.log(buffer);
+
   console.log({
     ...pick(req, [
       'method',
@@ -11,7 +16,7 @@ function handle(req: Request, res: Response) {
     ]),
   });
 
-  res.status(200);
+  res.status(200).send("OK");
 }
 
 export default {

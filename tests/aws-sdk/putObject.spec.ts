@@ -4,7 +4,7 @@ const s3 = new S3({
   endpoint: 'http://localhost:3000/',
 });
 
-describe('copyObject', () => {
+describe('putObject', () => {
   it('is defined', async () => {
     await s3.putObject({
       Bucket: 'BUCKET',

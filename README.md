@@ -2,8 +2,11 @@
 
 A s3 compatible service that stores files on the local filesystem.
 
-## Plan
+# TODO
+- how to differentiate different requests?
 
+# Design
+Uses (raw-body)[https://www.npmjs.com/package/raw-body] to get Body data.
 
 ## Suported Actions
 - CreateBucket
