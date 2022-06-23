@@ -1,19 +1,16 @@
-import { Request, Response } from "express";
-
-const express = require('express');
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
+import express, { Request, Response } from 'express';
+import actionHandler from './action.handler';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
-app('*', (req: Request, res: Response) => {
-  console.log({
-    method: req.method,
-    headers: req.headers,
-  })
-  res.send(200);
+app.use(express.urlencoded());
+
+app.all('*', async (req: Request, res: Response) => {
+  await actionHandler.handle(req, res);
 });
 
 app.listen(port, () => {

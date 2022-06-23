@@ -1,5 +1,10 @@
 # s3
 
+A s3 compatible service that stores files on the local filesystem.
+
+## Plan
+
+
 ## Suported Actions
 - CreateBucket
 - DeleteBucket
