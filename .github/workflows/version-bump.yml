@@ -46,8 +46,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: 'Build:dockerimage'
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
+          context: .
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
             notben/s3local:latest,
             notben/s3local:${{ steps.new_version.outputs.VERSION }}
