@@ -49,5 +49,5 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           tags: |
-            s3local:latest,
-            s3local:${{ steps.new_version.outputs.VERSION }}
+            notben/s3local:latest,
+            notben/s3local:${{ steps.new_version.outputs.VERSION }}
