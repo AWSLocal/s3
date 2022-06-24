@@ -1,0 +1,53 @@
+name: version-bump
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        type: choice
+        required: true
+        description: Type of version bump
+        options: 
+          - major
+          - minor
+          - patch
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+
+    # if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          default: ${{ github.event.inputs.type }}
+          commit-message: '${{ github.event.inputs.type }} bump to version {{version}}'
+
+      - id: new_version
+        run: |
+          echo "::set-output name=VERSION::$(
+            node -p -e "require('./package.json').version"
+          )"
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: ${{ steps.new_version.outputs.VERSION }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: 'Build:dockerimage'
+        uses: docker/build-push-action@v1
+        with:
+          tags: |
+            s3local:latest,
+            s3local:${{ steps.new_version.outputs.VERSION }}
