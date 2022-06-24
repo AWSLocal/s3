@@ -1,21 +1,17 @@
-import { Request } from 'express';
 import { FsRespository } from '../repositories/fs.repository';
-
-const fsRepo = new FsRespository();
+import { BucketService } from './bucket.service';
+import { ObjectService } from './object.service';
 
 export class S3 {
-  putObject(req: Request, buffer: Buffer) {
-    const { bucket, key } = req.params;
-    fsRepo.put(bucket, key, buffer);
-  }
+  fs: FsRespository;
 
-  copyObject() {
-    console.log('copyObject');
-    return {
-      CopyObjectResult: {
-        LastModified: 'text',
-        ETag: 'text',
-      },
-    };
+  object: ObjectService;
+
+  bucket: BucketService;
+
+  constructor() {
+    this.fs = new FsRespository();
+    this.object = new ObjectService(this, this.fs);
+    this.bucket = new BucketService(this, this.fs);
   }
 }

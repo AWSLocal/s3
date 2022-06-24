@@ -4,12 +4,10 @@ const s3 = new S3({
   endpoint: 'http://localhost:3000/',
 });
 
-describe('putObject', () => {
+describe('deleteBucket', () => {
   it('is defined', async () => {
-    await s3.putObject({
-      Bucket: 'BUCKET1',
-      Key: 'FOLDER1/KEY',
-      Body: 'BODY',
+    await s3.deleteBucket({
+      Bucket: 'BUCKET2',
     }).promise();
   });
 });

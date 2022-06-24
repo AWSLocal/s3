@@ -9,13 +9,17 @@ const port = process.env.PORT;
 
 app.use(express.urlencoded({ extended: true }));
 
-app.put('/:bucket/*', async (req: Request, res: Response) => {
+app.all('/:bucket/*', async (req: Request, res: Response) => {
   req.params.key = req.params[0];
-  await actionHandler.handlePut(req, res);
+  await actionHandler.objectAction(req, res);
+});
+
+app.all('/:bucket', async (req: Request, res: Response) => {
+  await actionHandler.bucketAction(req, res);
 });
 
 app.all('*', async (req: Request, res: Response) => {
-  await actionHandler.handleDefault(req, res);
+  await actionHandler.defaultAction(req, res);
 });
 
 app.listen(port, () => {

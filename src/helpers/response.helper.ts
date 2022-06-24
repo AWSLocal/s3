@@ -1,8 +1,10 @@
 import { Response } from 'express';
-import { create } from 'xmlbuilder2';
+import { Builder } from 'xml2js';
+
+const builder = new Builder();
 
 export function generateXML(input: any) {
-  const xml = create({ root: input }).end({ prettyPrint: true });
+  const xml = builder.buildObject(input);
   console.log(xml);
   return xml;
 }
