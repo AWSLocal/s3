@@ -6,10 +6,11 @@ const s3 = new S3({
 
 describe('copyObject', () => {
   it('is defined', async () => {
-    await s3.copyObject({
-      CopySource: 'COPYSOURCE',
-      Bucket: 'BUCKET',
-      Key: 'KEY',
-    }).promise();
+    console.log(
+      await s3.copyObject({
+        CopySource: 'COPYSOURCE',
+        Bucket: 'BUCKET',
+        Key: 'KEY',
+      }).promise());
   });
 });

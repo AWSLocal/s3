@@ -4,6 +4,7 @@ A s3 compatible service that stores files on the local filesystem.
 
 # TODO
 - how to differentiate different requests?
+- depending on env var use a flat directory structure or proper one (encode / or don't)
 
 # Design
 Uses (raw-body)[https://www.npmjs.com/package/raw-body] to get Body data.

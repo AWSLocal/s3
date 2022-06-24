@@ -8,7 +8,7 @@ describe('putObject', () => {
   it('is defined', async () => {
     await s3.putObject({
       Bucket: 'BUCKET',
-      Key: 'KEY',
+      Key: 'KE/Y/12345',
       Body: 'BODY',
     }).promise();
   });

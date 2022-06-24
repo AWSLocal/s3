@@ -1,11 +1,6 @@
 import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
-import multer from 'multer';
 import actionHandler from './action.handler';
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 
 dotenv.config();
 
@@ -14,8 +9,13 @@ const port = process.env.PORT;
 
 app.use(express.urlencoded({ extended: true }));
 
-app.all('*', upload.any(), async (req: Request, res: Response) => {
-  await actionHandler.handle(req, res);
+app.put('/:bucket/*', async (req: Request, res: Response) => {
+  req.params.key = req.params[0];
+  await actionHandler.handlePut(req, res);
+});
+
+app.all('*', async (req: Request, res: Response) => {
+  await actionHandler.handleDefault(req, res);
 });
 
 app.listen(port, () => {
