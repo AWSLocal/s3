@@ -2,3 +2,4 @@ node_modules
 build
 S3_DATA
 .vscode
+coverage

@@ -20,7 +20,7 @@ export class ObjectService {
 
     return {
       CopyObjectResult: {
-        LastModified: 'text',
+        LastModified: '0000000000000',
         ETag: 'text',
       },
     };

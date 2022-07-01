@@ -11,7 +11,9 @@ module.exports = {
     'airbnb-typescript/base'
   ],
   parserOptions: {
-    project: './tsconfig.json'
+    project: [
+      'tsconfig.json',
+    ]
   },
   env: {
     'node': true,

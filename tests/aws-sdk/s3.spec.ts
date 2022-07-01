@@ -54,6 +54,17 @@ describe('s3', () => {
     });
   });
 
+  describe('getObject', () => {
+    it('is defined', async () => {
+      console.log(
+        await s3.getObject({
+          Bucket: 'BUCKET1',
+          Key: 'FOLDER1/KEY',
+        }).promise(),
+      );
+    });
+  });
+
   describe('createBucket', () => {
     it('is defined', async () => {
       await s3.createBucket({

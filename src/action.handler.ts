@@ -37,7 +37,12 @@ async function objectAction(req: Request, res: Response) {
 
   generateResponseHeaders(res);
 
-  res.status(200).send(generateXML(result));
+  res.status(200);
+  if (result) {
+    res.send(generateXML(result));
+  } else {
+    res.end();
+  }
 }
 
 async function bucketAction(req: Request, res: Response) {
@@ -65,7 +70,12 @@ async function bucketAction(req: Request, res: Response) {
     ]),
   });
 
-  res.status(200).send(generateXML(result));
+  res.status(200);
+  if (result) {
+    res.send(generateXML(result));
+  } else {
+    res.end();
+  }
 }
 
 async function defaultAction(req: Request, res: Response) {

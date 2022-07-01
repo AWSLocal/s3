@@ -10,11 +10,15 @@ RUN npm run build
 RUN npm prune --production
 
 RUN rm -rf \ 
-    test \
+    tests \
     src \
+    .github \
     tsconfig.build.json \
-    nest-cli.json \
+    jest.config.js \
+    .eslintignore \
+    .eslintrc.cjs \
+    .gitignore \
     tsconfig.json \
     README.md
 
-CMD [ "sh", "-c", "npm run start:prod"]
+CMD [ "npm", "run", "start:prod"]
